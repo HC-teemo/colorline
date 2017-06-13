@@ -1,0 +1,23 @@
+.main-color{
+  color: #ee6e73;
+}
+.main-color-bg{
+  background-color: #ee6e73;
+}
+p {
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  text-align: center;
+  font-weight: 300;
+}
+.btn{
+  background-color: #ee6e73;
+}
+.btn:hover{
+  background-color: #ff656b;
+}
+.btn:focus{
+  background-color: #ff656b;
+}

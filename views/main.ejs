@@ -1,0 +1,104 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style media="screen">
+        .preloader{
+          position:fixed;
+          top:0;
+          left:0;
+          width:100%;
+          height:100%;
+          background:#fff;
+          z-index:15000;
+        }
+        .preloader-logo{
+          margin-top: 30%;
+        }
+        .preloader-logo img{
+          margin: 0 auto;
+          display: block;
+        }
+        .preloader .preloader-wrapper{
+          margin: 0 auto;
+          margin-top: 30%;
+          display: block;
+        }
+        .user-info{
+          margin-top: 15%;
+        }
+        .user-info img{
+          height: 80px;
+          width: 80px;
+          display: block;
+          margin: 0 auto;
+        }
+        .hello{
+          font-size: xx-large;
+        }
+        .buttons{
+          font-size: normal;
+        }
+        .buttons a{
+          width: 40%;
+          left: 30%;
+        }
+      </style>
+    </head>
+
+    <body>
+      <div class="preloader">
+        <div class="preloader-logo">
+          <img class="responsive-img" src="img/logo.svg">
+        </div>
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-red-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <div class="user">
+          <div class="user-info">
+             <img class="responsive-img circle" src="img/user.jpg">
+          </div>
+          <div class="hello main-color">
+            <p>hello,user!</p>
+          </div>
+        </div>
+        <div class="buttons main-color">
+          <p>初次尝试？</p>
+          <a class="waves-effect waves-light btn main-color-bg">选择版型</a>
+          <p>已有作品？</p>
+          <a class="waves-effect waves-light btn main-color-bg">点此上传</a>
+          <p>已有订单？</p>
+          <a class="waves-effect waves-light btn main-color-bg">查看订单</a>
+        </div>
+      </div>
+      <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript">
+      //关闭加载动画
+      // $(".preloader").hide();
+       document.onreadystatechange = completeLoading;
+       function completeLoading() {
+         if (document.readyState == "complete") {
+            setTimeout(()=>{$(".preloader").hide()},500);
+         }
+       }
+      </script>
+    </body>
+  </html>

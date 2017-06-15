@@ -1,0 +1,17 @@
+--user
+
+--category
+  -code
+  -name
+  -picture
+
+
+--cloth
+  -name
+  -category
+  -price
+  -sizes[]
+    -name
+    -img
+  -pryPic
+  -othPic

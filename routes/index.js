@@ -17,4 +17,12 @@ router.get('/category', function(req, res, next) {
 router.get('/style', function(req, res, next) {
   res.render('style', { title: 'Express' });
 });
+
+router.get('/choose', function(req, res, next) {
+  res.render('choose', { title: 'Express' });
+});
+
+router.get('/eng', function(req, res, next) {
+  res.render('eng', { title: 'Express' });
+});
 module.exports = router;

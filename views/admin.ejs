@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<!-- release v4.1.8, copyright 2014 - 2015 Kartik Visweswaran -->
+<html class="slate_gray">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>管理</title>
+        <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css' >
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
+        <link href='css/fileinput.min.css' media="all" rel="stylesheet" type="text/css" >
+        <link rel="stylesheet" href="css/remodal.css">
+        <link rel="stylesheet" href="css/remodal-default-theme.css">
+
+
+
+        <style>
+          .alert{
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            display: none;
+          }
+          .btn-primary{
+            background-color: #303d4a;
+            border-color:#303d4a;
+          }
+          #bt1{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            float: right;
+          }
+          .logo {
+              display: block;
+              background-image: url(../img/content/logo.png);
+              background-position: 0px 0px;
+              width: 180px;
+              height: 32px;
+              background-size: 180px, 138px;
+              background-repeat: no-repeat;
+          }
+          .wrap-logo {
+              padding-top: 18px;
+          }
+          .myTabDiv{
+            height: 100%;
+            background-color: #303d4a;
+            padding: 0px !important;
+            position: absolute;
+            z-index: 99;
+          }
+          #TabContent{
+            float: right;
+            padding-left: 0!important;
+          }
+          #myTab li a{
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            color: #fff;
+          }
+          #myTab li a:hover{
+          background-color: #242d37;
+          }
+          #myTab{
+            border: none;
+            text-align: center;
+          }
+          #myTab>li.active>a{
+            background-color: #242d37;
+          }
+          .tablecontent{
+            margin-left: 0;
+            margin-right: 0;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+          }
+          #category img{
+            max-width:30%;
+          }
+        </style>
+    </head>
+    <body >
+      <div class=" wrapper-sticky-footer remodal-bg ">
+      <!-- Header -->
+        <div class="content-sticky">
+        <header id="header" >
+            <div class="header__top">
+                <div class="container">
+                    <div class="row" style="height:70px;">
+                        <div class="col-sm-3">
+                            <div class="wrap-logo">
+                                <!-- <img src="img/logo.svg" alt=""> -->
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-2 col-md-offset-5 col-sm-6 col-md-4 hidden-xs">
+                            <div class="col-xs-4 col-sm-2">
+                              <p class="userName"></p>
+                            </div>
+                            <!-- <div class="col-xs-6 col-sm-5">
+                                <div class="sign">
+                                    <a href="./sign"><span>sign</span></a>
+                                </div>
+                                <div class="logout" style="display:none">
+                                    <a href="./logout"><span>logout</span></a>
+                                </div>
+                            </div> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wsmenucontent overlapblackbg"></div>
+            <div class="wsmenuexpandermain slideRight">
+                <a id="navToggle" class="animated-arrow slideLeft">
+                    <span></span>
+                </a>
+            </div>
+        </header>
+        <!-- END header -->
+          <div class="row" style="height:100%;position:relative;">
+            <div class="alert alert-success" role="alert" id='alertBox-success'>Success!</div>
+            <div class="alert alert-danger" role="alert" id='alertBox-danger'>Error!</div>
+            <div class="myTabDiv col-md-1">
+              <ul id="myTab" class="nav nav-tabs nav-pills nav-stacked ">
+                <li class="active"><a href="#category" data-toggle="tab"><i class="fa fa-lg"></i>类型管理</a></li>
+                <li><a href="#cloth" data-toggle="tab"><i class="fa fa-lg"></i>款式管理</a></li>
+                <li><a href="#order" data-toggle="tab"><i class="fa fa-lg"></i>订单管理</a></li>
+              </ul>
+            </div>
+            <div class="tab-content col-md-11" id="TabContent">
+              <div id="category" class="tab-pane fade in active">
+                <div class="wrap wrap_white">
+                    <div class="container title">
+                        <h1 class="title__h1 underscore">类型管理</h1>
+                    </div>
+                </div>
+                <div >
+                    <div class=" tablecontent wrap_white">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">新增类型</button>
+                      <table class="table table-bordered table-hover">
+                        <colgroup>
+                          <col style="width:10%">
+                          <col style="width:20%">
+                          <col style="width:40%">
+                          <col style="width:30%">
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>类型名称</th>
+                            <th>图片</th>
+                            <th>操作</th>
+                          </tr>
+                        </thead>
+                        <tbody id='categorytable'>
+
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+
+              </div>
+              <div id="cloth" class="tab-pane fade in">
+                <div class="wrap wrap_white">
+                    <div class="container title">
+                        <h1 class="title__h1 underscore">款式管理</h1>
+                    </div>
+                </div>
+                <div >
+                    <div class=" tablecontent wrap_white">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCloth">新增款式</button>
+                        <table class="table table-bordered table-hover">
+                          <colgroup>
+                            <col style="width:10%">
+                            <col style="width:30%">
+                            <col style="width:20%">
+                            <col style="width:10%">
+                            <col style="width:30%">
+                          </colgroup>
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>款式名称</th>
+                              <th>所属分类</th>
+                              <th>售价</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id='clothtable'>
+
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>
+              <div id="order" class="tab-pane fade in">
+                <div class="wrap wrap_white">
+                    <div class="container title">
+                        <h1 class="title__h1 underscore">评论管理</h1>
+                    </div>
+                </div>
+                <div >
+                    <div class=" tablecontent wrap_white">
+                        <table class="table table-bordered table-hover">
+                          <colgroup>
+                            <col style="width:5%">
+                            <col style="width:30%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:40%">
+                            <col style="width:5%">
+                          </colgroup>
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>新闻标题</th>
+                              <th>用户名</th>
+                              <th>评论日期</th>
+                              <th>内容</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id='commentstable'>
+
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer slate_gray" style="position:relative;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="copyright">Copyright &copy; 2017.Company name All rights reserved.</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="social navbar-right">
+                            <p class="social__text">We are in social networks</p>
+                            <ul class="social__list">
+                                <li class="social__item">
+                                    <a class="facebook" href="#">
+                                        <i class="icon-facebook"></i>
+                                    </a>
+                                </li>
+                                <li class="social__item">
+                                    <a class="twitter" href="#">
+                                        <i class="icon-twitter"></i>
+                                    </a>
+                                </li>
+                                <li class="social__item">
+                                    <a class="gplus" href="#">
+                                        <i class="icon-gplus"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+      </div>
+      <!--  Models -->
+        <div class="remodal" data-remodal-id="modal">
+          <button data-remodal-action="close" class="remodal-close"></button>
+          <h1>确认？</h1>
+          <p>
+            确认执行此操作？
+          </p>
+          <br>
+          <button data-remodal-action="cancel" class="remodal-cancel">取消</button>
+          <button data-remodal-action="confirm" class="remodal-confirm">确认</button>
+        </div>
+        <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="myModalLabel">新增类型</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form class="" action="" method="post">
+                      <div class="form-group">
+                        <label>名称</label>
+                        <input type="text" class="form-control" id="addCategory-name" placeholder="如：连衣裙" >
+                      </div>
+                      <div class="form-group">
+                        <label>图片</label>
+                        <p class="help-block">务必上传图片尺寸为4:3</p>
+                        <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" required="required">
+                      </div>
+                      <p class="bg-danger" id="addCategory-error"></p>
+                    </form>
+
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                      <button type="button" class="btn btn-primary" id="categoryAdd">完成</button>
+                  </div>
+              </div><!-- /.modal-content -->
+          </div><!-- /.modal -->
+      </div>
+      <div class="modal fade" id="addCloth" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">新增款式</h4>
+                </div>
+                <div class="modal-body">
+                  <form class="" action="" method="post">
+                    <div class="form-group">
+                      <label>名称</label>
+                      <input type="text" class="form-control" id="addCloth-name" placeholder="如：空白款" >
+                    </div>
+                    <div class="form-group">
+                      <label>类型</label>
+                      <select class="form-control" id="addCloth-category">
+                        <% for(var i=0; i<category.length; i++) {%>
+                           <option><%= category[i].name %></li></option>
+                        <% } %>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>售价</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">￥</span>
+                        <input type="number" class="form-control" id="addCloth-price" placeholder="99" >
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="clothAdd">完成</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+  <script type="text/javascript">
+    var dataset={
+      category:<%- JSON.stringify(category) %>,
+      cloth:<%- JSON.stringify(cloth)%>
+    };
+  console.debug(dataset);
+  </script>
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/remodal.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="/js/fileinput.js" type="text/javascript"></script>
+  <script src="/js/fileinput_locale_zh.js" type="text/javascript"></script>
+  <script>
+
+    function alertMsg(type,msg){
+      let state;
+      switch (type) {
+        case 'success':
+          state='成功'
+          break;
+        case 'danger':
+          state='错误'
+          break;
+      }
+      $('#alertBox-'+type).html(`<b>${state}!  </b>${msg}`).fadeIn('slow/400/fast').delay(2000).fadeOut('slow/400/fast');
+    }
+
+    function fileinputInit(id,url){
+      console.debug("fileinputInit")
+      $("#"+id).fileinput({
+          uploadUrl: url,
+          language: 'zh', //设置语言
+          //allowedFileExtensions : ['jpg', 'png','gif'],
+          //overwriteInitial: false,
+          showPreview:false,
+          uploadAsync: false,
+          maxFileSize: 5000,
+          maxFileCount: 1,
+          minFileCount: 1,
+          showUpload: false,
+          allowedFileTypes: ['image'],
+          uploadExtraData: function(previewId, index) {
+              return dataJson;
+          }
+    	});
+      $('#'+id).on('filebatchuploadsuccess',function(event,data){
+        console.debug(data);
+        // alertMsg('success','新闻已上传。');
+        setTimeout("window.location.href = '/admin' ",500);
+      });
+      $('#'+id).on('fileuploaderror', function(event) {
+        console.debug("fileerror...");
+      });
+      $('#'+id).on('filebatchuploaderror', function(event, data, msg) {
+         console.debug(data.response.error);
+        //  alertMsg('danger',data.response.error);
+        $("#addCategory-error").text(data.response.error).show('slow/400/fast');
+      });
+    }
+    var dataJson={};
+    fileinputInit("file-1","/addCategory");
+
+    $(document).ready(function() {
+    //   user=dataset.user;
+      category=dataset.category;
+      cloth=dataset.cloth;
+    //   comments=dataset.comments;
+    //   if(!user.null){
+    //     $(".sign").hide();
+    //     $(".logout").show();
+    //     $(".userName").text("hello,"+user.name);
+    //   }
+      //render
+      let categorytable=$("#categorytable");
+      let clothtable=$("#clothtable");
+    //   let commentstable=$("#commentstable");
+      for (var i = 0; i < category.length; i++) {
+        let n=category[i];
+        categorytable.append(`
+          <tr>
+            <th>${i+1}</th>
+            <td>${n.name}</td>
+            <td><img src="images/${n.img}" alt="" /></td>
+            <td>
+              <button class="btn btn-danger delete">删除</button>
+            </td>
+          </tr>
+          `);
+      }
+      for (var i = 0; i < cloth.length; i++) {
+        let n=cloth[i];
+        clothtable.append(`
+          <tr>
+            <th>${i+1}</th>
+            <td>${n.name}</td>
+            <td>${n.category}</td>
+            <td>${n.price}</td>
+            <td>
+              <button class="btn btn-info moreinfo">详细信息</button>
+              <button class="btn btn-danger clothdelete">删除</button>
+            </td>
+          </tr>
+          `);
+      }
+    //   for (var i = 0; i < comments.length; i++) {
+    //     let n=comments[i];
+    //     commentstable.append(`
+    //       <tr>
+    //         <th>${i+1}</th>
+    //         <td>${n.news}</td>
+    //         <td>${n.user.name}</td>
+    //         <td>${n.time.substring(0,10)}</td>
+    //         <td>${n.content}</td>
+    //         <td>
+    //           <button class="btn btn-danger commentdelete">删除</button>
+    //         </td>
+    //       </tr>
+    //       `);
+    //   }
+    //   //end render
+    //   //change tab
+    //   let url=window.location.href;
+    //   var reg2 = /([^?]+)$/;
+    //   var blueurl = url.match(reg2)[1];
+    //   let index=0;
+    //   switch (blueurl) {
+    //     case "news":
+    //       index=0;
+    //       break;
+    //     case "users":
+    //       index=1;
+    //       break;
+    //     case "comments":
+    //       index=2;
+    //       break;
+    //   }
+    //   console.log(index);
+    //   var tabli=$("#myTab li:eq("+index+") a");
+    //   tabli.tab("show");
+    //   //end change
+      //button event
+    //   var inst = $('[data-remodal-id=modal]').remodal();//模态框
+    //   //model event
+    //   function modalevent(callback){
+    //     inst.open();
+    //     $(document).on('confirmation', '.remodal', function () {
+    //       callback();
+    //     });
+    //   }
+    //
+    $("#categoryAdd").on('click', function(event) {
+      var name=$("#addCategory-name").val();
+        if(!name){
+          $("#addCategory-name").parent().addClass('has-error')
+        }else {
+          dataJson.name=name;
+          $('#file-1').fileinput('upload');
+        }
+    });
+    $("#clothAdd").on('click', function(event) {
+      var name=$("#addCloth-name").val();
+      var category=$("#addCloth-category").val();
+      var price=$("#addCloth-price").val();
+      if(!name){
+        $("#addCloth-name").parent().addClass('has-error');
+      }else if (!category) {
+        $("#addCloth-category").parent().addClass('has-error');
+      }else if (!price||price<1) {
+        $("#addCloth-price").parent().addClass('has-error');
+      }
+      else {
+        $("#addCloth-name").parent().removeClass('has-error');
+        $("#addCloth-category").parent().removeClass('has-error');
+        $("#addCloth-price").parent().removeClass('has-error');
+        $.ajax({
+          url: '/addCloth',
+          type: 'POST',
+          data: {
+            name: name,
+            category: category,
+            price: price
+          }
+        })
+        .done(function(res) {
+          console.log(res);
+        });
+      }
+    });
+
+      $(".moreinfo").on('click', function(event) {
+        let index=$('.moreinfo').index(this);
+        location.href="./clothinfo/"+cloth[index]._id;
+      });
+
+    //   $(".delete").on('click', function(event) {
+    //     modalevent(()=>{
+    //       let index=$('.delete').index(this);
+    //       $.ajax({
+    //         url: '/delete',
+    //         type: 'POST',
+    //         data: {
+    //           name: news[index].name,
+    //           type: "news"
+    //         }
+    //       })
+    //       .done(function(res) {
+    //         if(res.state){
+    //           alertMsg('success',res.info);
+    //           setTimeout(function () {
+    //             location.href="/admin?news";
+    //           },500)
+    //         }else {
+    //           alertMsg('danger',res.info);
+    //         }
+    //       });
+    //     });
+    //   });
+    //
+    //   $(".userdelete").on('click', function(event) {
+    //     modalevent(()=>{
+    //       let index=$('.userdelete').index(this);
+    //       $.ajax({
+    //         url: '/delete',
+    //         type: 'POST',
+    //         data: {
+    //           name: users[index].name,
+    //           type: "user"
+    //         }
+    //       })
+    //       .done(function(res) {
+    //         if(res.state){
+    //           alertMsg('success',res.info);
+    //           setTimeout(function () {
+    //             location.href="/admin?users";
+    //           },500)
+    //         }else {
+    //           alertMsg('danger',res.info);
+    //         }
+    //       });
+    //     });
+    //   });
+    //
+    //   $(".commentdelete").on('click', function(event) {
+    //     modalevent(()=>{
+    //       let index=$('.commentdelete').index(this);
+    //       $.ajax({
+    //         url: '/delete',
+    //         type: 'POST',
+    //         data: {
+    //           id: comments[index]._id,
+    //           type: "comment"
+    //         }
+    //       })
+    //       .done(function(res) {
+    //         console.debug(res);
+    //         if(res.state){
+    //           alertMsg('success',res.info);
+    //           setTimeout(function () {
+    //             location.href="/admin?comments";
+    //           },500)
+    //         }else {
+    //           alertMsg('danger',res.info);
+    //         }
+    //       });
+    //     });
+    //   });
+
+    });
+	</script>
+  </body>
+</html>

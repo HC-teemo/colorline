@@ -10,14 +10,9 @@ module.exports = users;
 
 //存储用户信息
 users.prototype.save = function(callback) {
-  var date = new Date(Date.now() + (8 * 60 * 60 * 1000));
 
   var users = {
-    name: this.name, //用户名
-    email: this.email, //用户邮箱
-    key: this.key, //密码
-    time: date, //注册时间
-    quanxian: 0 //0:普通用户、1:普通管理员、2:超级管理员
+
   };
   //打开数据库
   mongodb.open(function(err, db) {
@@ -43,7 +38,7 @@ users.prototype.save = function(callback) {
     });
   });
 };
-
+/*
 users.search = function(name, callback) {
   //打开数据库
   mongodb.open(function(err, db) {
@@ -161,3 +156,4 @@ users.promote = function(name, callback) {
     });
   });
 }
+*/

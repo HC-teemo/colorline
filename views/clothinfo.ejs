@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>款式详情</title>
+    <link rel='stylesheet' type='text/css' href='/css/bootstrap.min.css' >
+    <link href='/css/fileinput.min.css' media="all" rel="stylesheet" type="text/css" >
+    <style>
+      .priInfo span{
+        font-size: 18px;
+        margin-bottom: 50px;
+      }
+      .priInfo .attr{
+        font-weight: bold;
+      }
+      .pryPic .pic{
+        width: 350px;
+        height: 400px;
+        border: 1px solid #111;
+      }
+      .pic img{
+        width: 100%;
+      }
+      .addOthPic,.addSize{
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        border: 2px dashed #222;
+        vertical-align: top;
+        cursor: pointer;
+      }
+      .addOthPic p,.addSize p{
+        text-align: center;
+        line-height: 200px;
+        font-size: 100px;
+      }
+      .othPics img,.sizePics .one-size{
+        display: inline-block;
+        height: 200px;
+        margin-right: 20px;
+        vertical-align: top;
+      }
+      .one-size img{
+        height: 100%;
+      }
+      .one-size span{
+        display: block;
+        text-align: center;
+        font-size: large;
+      }
+      body{
+        padding-bottom: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>款式详情</h1>
+      <div class="row">
+        <div class="col-md-8 priInfo">
+          <h3>基本信息</h3>
+          <span class="attr">名称：</span><span><%= cloth.name %></span><br>
+          <span class="attr">分类：</span><span><%= cloth.category %></span><br>
+          <span class="attr">售价：</span><span><%= cloth.price %></span><br>
+        </div>
+        <div class="col-md-4 pryPic">
+          <h3>预览图</h3>
+          <div class="pic"></div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12 othPic">
+          <h3>展示图</h3>
+          <br>
+          <div class="othPics">
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 sizes">
+          <h3>尺寸</h3>
+          <br>
+          <div class="sizePics">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- models -->
+    <div class="modal fade" id="addPic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+              </div>
+              <div class="modal-body">
+                <form class="" action="" method="post">
+                  <div class="form-group">
+                    <label>图片</label>
+                    <p class="help-block">务必上传图片尺寸为</p>
+                    <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" required="required">
+                  </div>
+                  <p class="bg-danger" id="addPic-error"></p>
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                  <button type="button" class="btn btn-primary" id="picAdd">完成</button>
+              </div>
+          </div><!-- /.modal-content -->
+      </div><!-- /.modal -->
+    </div>
+    <div class="modal fade" id="addSize" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+              </div>
+              <div class="modal-body">
+                <form class="" action="" method="post">
+                  <div class="form-group sizes">
+                    <label>名称</label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="XXS" value="XXS"> XXS
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="XS" value="XS"> XS
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="S" value="S"> S
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="M" value="M"> M
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="L" value="L"> L
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="XL" value="XL"> XL
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="XXL" value="XXL"> XXL
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="XXXL" value="XXXL"> XXXL
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <label>图片</label>
+                    <p class="help-block">务必上传图片尺寸为</p>
+                    <input id="file-2" type="file" multiple class="file" data-overwrite-initial="false" required="required">
+                  </div>
+                  <p class="bg-danger" id="addPic-error"></p>
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                  <button type="button" class="btn btn-primary" id="sizeAdd">完成</button>
+              </div>
+          </div><!-- /.modal-content -->
+      </div><!-- /.modal -->
+    </div>
+    <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/fileinput.js" type="text/javascript"></script>
+    <script src="/js/fileinput_locale_zh.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var dataset={
+        cloth:<%- JSON.stringify(cloth)%>
+      };
+      console.debug(dataset);
+    </script>
+    <script type="text/javascript">
+      function fileinputInit(id,url){
+        console.debug("fileinputInit")
+        $("#"+id).fileinput({
+            uploadUrl: url,
+            language: 'zh', //设置语言
+            //allowedFileExtensions : ['jpg', 'png','gif'],
+            //overwriteInitial: false,
+            showPreview:false,
+            uploadAsync: false,
+            maxFileSize: 5000,
+            maxFileCount: 1,
+            minFileCount: 1,
+            showUpload: false,
+            allowedFileTypes: ['image'],
+            uploadExtraData: function(previewId, index) {
+                return dataJson;
+            }
+      	});
+        $('#'+id).on('filebatchuploadsuccess',function(event,data){
+          console.debug(data);
+          // alertMsg('success','新闻已上传。');
+          setTimeout("location.reload()",500);
+        });
+        $('#'+id).on('fileuploaderror', function(event) {
+          console.debug("fileerror...");
+        });
+        $('#'+id).on('filebatchuploaderror', function(event, data, msg) {
+           console.debug(data.response.error);
+          //  alertMsg('danger',data.response.error);
+          $("#addCategory-error").text(data.response.error).show('slow/400/fast');
+        });
+      }
+      var dataJson={
+        type:null,
+        id:null
+      };
+      fileinputInit("file-1","/addPic");
+      fileinputInit("file-2","/addSize");
+      $(document).ready(function() {
+        var cloth=dataset.cloth;
+        //render
+        if(!cloth.pryPic){
+          $(".pryPic .pic").append('<p class="text-center"><span>暂无图片</span><br><a data-toggle="modal" data-target="#addPic">点此上传</a></p>')
+        }else{
+          $(".pryPic .pic").append(`<img src="/images/${cloth.pryPic}" alt="" />`);
+        }
+        for(var i=0;i<cloth.othPic.length;i++){
+          $(".othPics").append(`<img src="/images/${cloth.othPic[i]}" alt="" />`);
+        }
+        if(cloth.othPic.length<3){
+          $(".othPics").append('<div class="addOthPic" data-toggle="modal" data-target="#addPic"><p>+</p></div>');
+        }
+        for(var i=0;i<cloth.size.length;i++){
+          $(".sizePics").append(`<div class="one-size"><img src="/images/${cloth.size[i].img}" alt="" /><span>${cloth.size[i].size}</span></div>`);
+          $("#"+cloth.size[i].size).parent().hide();
+        }
+        if(cloth.size.length<13){
+          $(".sizePics").append('<div class="addSize" data-toggle="modal" data-target="#addSize"><p>+</p></div>');
+        }
+        //event
+        $(".pic a").on('click', function(event) {
+          dataJson.type="pry";
+          console.debug(dataJson);
+        });
+        $(".addOthPic").on('click', function(event) {
+          dataJson.type="oth";
+          console.debug(dataJson);
+        });
+        $("#picAdd").on('click', function(event) {
+          dataJson.id=cloth._id
+          console.debug(dataJson);
+          $('#file-1').fileinput('upload');
+        });
+        $("#sizeAdd").on('click', function(event) {
+          dataJson.id=cloth._id;
+          var radionum = $(".sizes input");
+           for(var i=0;i<radionum.length;i++){
+           if(radionum[i].checked){
+            dataJson.size= radionum[i].value;
+           }
+          }
+          console.debug(dataJson);
+          $('#file-2').fileinput('upload');
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style media="screen">
+      </style>
+    </head>
+
+    <body>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center">Logo</a>
+          <ul id="nav-mobile" class="left">
+            <li><a href="javascript:history.go(-1)">back</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="input-field styles">
+          <select>
+          </select>
+          <label>选择款式</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="name" type="text" class="validate">
+          <label for="name">收货人姓名</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">phone</i>
+          <input id="Tel" type="tel" class="validate" data-length="11">
+          <label for="Tel">联系电话</label>
+        </div>
+        <div class="row">
+          <div class="input-field col s4">
+            <select name="" id=""></select>
+            <label for=""></label>
+          </div>
+          <div class="input-field col s4">
+            <select name="" id=""></select>
+            <label for=""></label>
+          </div>
+          <div class="input-field col s4">
+            <select name="" id=""></select>
+            <label for=""></label>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript">
+      var dataset={
+        data:<%- JSON.stringify(data) %>
+      };
+      console.debug(dataset);
+      </script>
+      <script type="text/javascript">
+        $(document).ready(function() {
+          //init
+          var categorys=dataset.data.category;
+          var clothes=dataset.data.cloth;
+          //render
+          var map={};
+          for(var i=0;i<categorys.length;i++){
+            var ca=categorys[i];
+            map[ca.name]=[];
+          }
+          for(i=0;i<clothes.length;i++){
+            var cl=clothes[i];
+            if(map[cl.category]){
+              map[cl.category].push(cl);
+            }
+          }
+          // console.debug(map);
+          var insertPoint=$('.styles select');
+          var insertStr='';
+          for(i=0;i<categorys.length;i++){
+            var cname=categorys[i].name;
+            var clArr=map[cname];
+            if(clArr.length>0){
+              insertStr+=`<optgroup label="${cname}">`;
+              for(var j=0;j<clArr.length;j++){
+                insertStr+=`<option value="${clArr[j]._id}" data-icon="/images/${clArr[j].pryPic}" class="circle">${clArr[j].name}</option>`;
+              }
+              insertStr+=`</optgroup>`;
+            }
+          }
+          // console.debug(insertStr);
+          insertPoint.append(insertStr);
+          $('select').material_select();
+        });
+      </script>
+    </body>
+  </html>

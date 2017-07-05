@@ -5,10 +5,10 @@
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-      <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
-      <link rel="stylesheet" type="text/css" href="css/animations.css"/>
-      <link rel="stylesheet" type="text/css" href="css/component.css"/>
+      <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="/css/style.css"  media="screen,projection"/>
+      <link rel="stylesheet" type="text/css" href="/css/animations.css"/>
+      <link rel="stylesheet" type="text/css" href="/css/component.css"/>
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <style media="screen">
@@ -75,24 +75,30 @@
       <div class="main">
         <div class="user">
           <div class="user-info">
-             <img class="responsive-img circle" src="img/user.jpg">
+             <img class="responsive-img circle" src="<%= data.headimgurl%>">
           </div>
           <div class="hello main-color">
-            <p>hello,user!</p>
+            <p>hello,<%= data.nickname%>!</p>
           </div>
         </div>
         <div class="buttons main-color">
           <p>初次尝试？</p>
-          <a class="waves-effect waves-light btn main-color-bg">选择版型</a>
+          <a class="waves-effect waves-light btn main-color-bg" href="/category">选择版型</a>
           <p>已有作品？</p>
-          <a class="waves-effect waves-light btn main-color-bg">点此上传</a>
+          <a class="waves-effect waves-light btn main-color-bg" href="/upload">点此上传</a>
           <p>已有订单？</p>
           <a class="waves-effect waves-light btn main-color-bg">查看订单</a>
         </div>
       </div>
-      <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+      <script type="text/javascript" src="/js/materialize.min.js"></script>
       <script src="js/transition.js"></script>
+      <script type="text/javascript">
+      var dataset={
+        data:<%- JSON.stringify(data) %>
+      };
+      console.debug(dataset);
+      </script>
       <script type="text/javascript">
       //关闭加载动画
       // $(".preloader").hide();

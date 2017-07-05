@@ -5,7 +5,7 @@
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -38,53 +38,77 @@
         <div class="nav-wrapper">
           <a href="#" class="brand-logo center">Logo</a>
           <ul id="nav-mobile" class="left">
-            <li><a href="sass.html">back</a></li>
+            <li><a href="javascript:history.go(-1)">back</a></li>
           </ul>
         </div>
       </nav>
       <div class="categorys">
         <table>
-        <tr>
-          <td>
-            <div class="category">
-              <div class="card">
-                <div class="card-image">
-                  <img src="img/category-2.jpg">
-                  <span class="card-title">Card Title</span>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="category">
-              <div class="card">
-                <div class="card-image">
-                  <img src="img/category-1.jpg">
-                  <span class="card-title">Card Title</span>
-                </div>
-              </div>
-            </div>
 
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="category">
-              <div class="card">
-                <div class="card-image">
-                  <img src="img/category-1.jpg">
-                  <span class="card-title">Card Title</span>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
         </table>
       </div>
       <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
       <script type="text/javascript">
-
+      var dataset={
+        categorys:<%- JSON.stringify(categorys) %>
+      };
+      console.debug(dataset);
+      </script>
+      <script type="text/javascript">
+        var categorys=dataset.categorys;
+        var categorystable=$(".categorys table");
+        //render
+        var rownum=parseInt(categorys.length/2);
+        console.debug(rownum);
+        for(var i=0,j=0;j<rownum;i+=2,j++){
+            categorystable.append(`
+              <tr>
+                <td>
+                  <div class="category">
+                  <a href="/style/${categorys[i].name}">
+                    <div class="card">
+                      <div class="card-image">
+                        <img src="/images/${categorys[i].img}">
+                        <span class="card-title">${categorys[i].name}</span>
+                      </div>
+                    </div>
+                  </a>
+                  </div>
+                </td>
+                <td>
+                  <div class="category">
+                  <a href="/style/${categorys[i+1].name}">
+                    <div class="card">
+                      <div class="card-image">
+                        <img src="/images/${categorys[i+1].img}">
+                        <span class="card-title">${categorys[i+1].name}</span>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              `);
+        }
+        if(i<categorys.length){
+          categorystable.append(`
+            <tr>
+              <td>
+                <div class="category">
+                <a href="/style/${categorys[i].name}">
+                  <div class="card">
+                    <div class="card-image">
+                      <img src="/images/${categorys[i].img}">
+                      <span class="card-title">${categorys[i].name}</span>
+                    </div>
+                  </div>
+                </a>
+                </div>
+              </td>
+            </tr>
+            `);
+        }
       </script>
     </body>
   </html>
